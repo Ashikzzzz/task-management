@@ -39,13 +39,14 @@ exports.loginAuser = async(req, res, next)=>{
         const user = await loginAuserService(email)        // if user exists send db the email
 
 
-        if(!user){                                          // if not user send response
+        if(!user){                                          // if not user exists send response
             res.status(200).json({
                 status: 'failed',
                 massage: "user doesn't exists",
              
        })
         }
+        
 
         const isPasswordLegal= user.comparePassword(password, user.password)        //comparepassword
 
@@ -81,7 +82,7 @@ exports.loginAuser = async(req, res, next)=>{
                        }
             })
 
-            
+
     } catch (error) {
         res.status(400).json({
             status: 'error',
