@@ -23,7 +23,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ["active","inactive","blocked"]
     }
-})
+},
+{
+    timestamps: true,
+}
+)
 
 // check password is hashed 
 

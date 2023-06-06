@@ -21,7 +21,11 @@ const taskSchema = new mongoose.Schema({
         type: String,
         enum: ["in-progress,","completed","pending"]
     }
-})
+},
+{
+    timestamps: true,
+}
+);
 
 // task model 
 
