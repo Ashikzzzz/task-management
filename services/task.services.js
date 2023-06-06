@@ -26,3 +26,10 @@ exports.updateAtaskServices = async (id, data) => {
     const result = await Task.updateOne({ _id: id }, { $set: data })
     return result
 };
+
+
+// delete a task services ---------------
+exports.deleteTaskServices = async (id) => {
+    const result = await Task.deleteOne({ _id: id })
+    return result
+};
