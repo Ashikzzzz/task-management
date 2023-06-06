@@ -1,10 +1,14 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const userRoute = require("./routes/user.route")
 
 // middleware
 app.use(express.json());
 app.use(cors());
+
+// using routes
+app.use("/api/user",userRoute)
 
 
 // ---------- Happy Server ----------
