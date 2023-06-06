@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(cors());
 
 // using routes
-app.use("/api/user",userRoute)
+app.use("/api/users",userRoute)
 
 
 // ---------- Happy Server ----------

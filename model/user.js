@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+const salt = bcrypt.genSaltSync(10);
 
+// user schema 
 
 const userSchema = new mongoose.Schema({
  
@@ -21,3 +24,20 @@ const userSchema = new mongoose.Schema({
         enum: ["active","inactive","blocked"]
     }
 })
+
+// check password is hashed 
+
+userSchema.pre("save",function(next){
+    const password = this.password
+    const hashedPassword = bcrypt.hashSync(password)
+    this.password =hashedPassword
+    next()
+
+})
+
+// user model 
+
+const User = mongoose.model("User",userSchema)
+
+
+module.exports = User;
