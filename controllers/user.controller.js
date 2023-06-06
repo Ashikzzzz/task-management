@@ -1,4 +1,5 @@
 const { createAuserService, loginAuserService } = require("../services/user.service");
+const { generateToken } = require("../utils/token");
 
 // save a user controller-------------------------------
 exports.createAuser = async(req, res, next)=>{
@@ -46,11 +47,41 @@ exports.loginAuser = async(req, res, next)=>{
        })
         }
 
-        res.status(200).json({
-            status: 'success',
-            massage: "User logged in Successfull!",
-            data: result
-        })
+        const isPasswordLegal= user.comparePassword(password, user.password)        //comparepassword
+
+
+        if(!isPasswordLegal){                                         // if password is not valid pass
+            res.status(200).json({
+                status: 'failed',
+                massage: "password is incorrect"
+            })
+        }
+
+            
+        if(user.status != "active"){                             //check user is not active or active
+            res.status(200).json({
+                status: 'failed',
+                massage: "user is not active"
+            })
+        }
+
+        const token = generateToken(user)                         // 8 . generate token
+
+        const {password: pwd, ...others} = user.toObject()      // ignore send password to db when login
+
+            // send response 
+
+        
+            res.status(200).json({
+                status: 'success',
+                massage: "user login Successfully!",
+                data: {
+                    others,
+                    token
+                       }
+            })
+
+            
     } catch (error) {
         res.status(400).json({
             status: 'error',

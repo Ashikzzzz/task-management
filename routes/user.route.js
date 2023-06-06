@@ -10,6 +10,6 @@ router.route("/create-user")
 
 // login router
 router.route("/log-in")
-.post(userController)
+.post(userController.loginAuser)
 
 module.exports = router;
