@@ -20,3 +20,9 @@ exports.createTaskServices = async (data) => {
     }
 };
 
+
+// update a task services ---------------
+exports.updateAtaskServices = async (id, data) => {
+    const result = await Task.updateOne({ _id: id }, { $set: data })
+    return result
+};

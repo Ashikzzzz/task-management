@@ -4,10 +4,11 @@ const taskController= require("../controllers/task.controller")
 
 router.route("/create-task")
 .post(taskController.createAtask)
+// get(taskController)
 
 
-router.route("/:id")
+router.route("/update-task/:id")
 .delete()
-.patch()
+.patch(taskController.updateAtask)
 
 module.exports = router;
