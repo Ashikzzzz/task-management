@@ -9,6 +9,7 @@ app.use(cors());
 
 // using routes
 app.use("/api/users",userRoute)
+app.use("/api/users",userRoute)
 
 
 // ---------- Happy Server ----------
