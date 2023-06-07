@@ -1,4 +1,4 @@
-const { createAuserService, loginAuserService, getAuserService, manageProfileService } = require("../services/user.service");
+const { createAuserService, loginAuserService, getAuserService, manageProfileService, findUserByEmail } = require("../services/user.service");
 const { generateToken } = require("../utils/token");
 
 // save a user controller-------------------------------
@@ -59,12 +59,12 @@ exports.loginAuser = async(req, res, next)=>{
         }
 
             
-        if(user.status != "active"){                             //check user is not active or active
-            res.status(200).json({
-                status: 'failed',
-                massage: "user is not active"
-            })
-        }
+        // if(user.status != "active"){                             //check user is not active or active
+        //     res.status(200).json({
+        //         status: 'failed',
+        //         massage: "user is not active"
+        //     })
+        // }
 
         const token = generateToken(user)                         // 8 . generate token
 
@@ -134,3 +134,24 @@ exports.manageAuser = async (req, res, next) => {
         })
     }
 };
+
+
+//  user persistance -------------------------------
+exports.getMe = async(req, res, next)=>{
+    try {
+        // console.log(req?.user?.userEmail)
+       let user= await findUserByEmail(req?.user?.email)
+       console.log(user)
+        res.status(200).json({
+            status: 'success',
+            massage: "User inserted Successfully!",
+            data: user
+        })
+    } catch (error) {
+        res.status(400).json({
+            status: 'error',
+            massage: "Data inserted Error",
+            error: error.message
+        })
+    }
+}

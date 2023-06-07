@@ -19,10 +19,14 @@ const userSchema = new mongoose.Schema({
         type : String,
         required: true
     },
-    status: {
+    role: {
         type: String,
-        enum: ["active","inactive","blocked"]
-    }
+        enum: ["admin","user"]
+    },
+    // status: {
+    //     type: String,
+    //     enum: ["active","inactive","blocked"]
+    // }
 },
 {
     timestamps: true,

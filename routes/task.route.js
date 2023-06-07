@@ -16,4 +16,9 @@ router.route("/update-task/:id")
 router.route("/delete-task/:id")
 .delete(taskController.deleteAtask)
 
+
+// get task user from another user ----------------------
+router.route("/get-task/email")
+.get(taskController.getTaskUserToUser)
+
 module.exports = router;

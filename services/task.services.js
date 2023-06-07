@@ -3,7 +3,6 @@ const Task= require("../model/task")
 
 // create a task and it is created for one time. avoid create duplicate task---------------
 exports.createTaskServices = async (data) => {
-
     if (data) {
         const taskData = await Task.findOne({title: {$eq: data.title}});
 
@@ -33,3 +32,12 @@ exports.deleteTaskServices = async (id) => {
     const result = await Task.deleteOne({ _id: id })
     return result
 };
+
+
+// get task from user to user service ---------------
+exports.getTaskUserToUserServices = async (email) => {
+    const result = await Task.findOne({email: {$eq: email}})
+    return result
+};
+
+

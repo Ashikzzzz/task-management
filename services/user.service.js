@@ -24,3 +24,10 @@ exports.manageProfileService= async(id,data)=>{
     const result = await User.updateOne({ _id: id }, { $set: data })
     return result
 }
+
+
+// user persistance
+exports.findUserByEmail = async (email) => {
+    return await User.findOne({ email });
+ };
+ 

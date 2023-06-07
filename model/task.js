@@ -13,10 +13,14 @@ const taskSchema = new mongoose.Schema({
         type : String,
         required: true,
     },
-    due_date : {
-        type : String,
-        required: true
-    },
+   email: {
+    type: String,
+    required: true
+   },
+     due_date: {
+        type: String
+     },
+
     status: {
         type: String,
         enum: ["in-progress,","completed","pending"]
@@ -26,6 +30,11 @@ const taskSchema = new mongoose.Schema({
     timestamps: true,
 }
 );
+
+
+
+
+
 
 // task model 
 
