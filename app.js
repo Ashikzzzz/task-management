@@ -12,7 +12,7 @@ app.use(cors());
 
 // using user routes
 app.use("/api/users",userRoute)
-app.use("/api/users",userRoute)
+
 
 // using task routes
 app.use("/api/task",taskRoute)

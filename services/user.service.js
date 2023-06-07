@@ -13,3 +13,14 @@ exports.loginAuserService = async(email)=>{
     const result = await User.findOne({email:email})
     return result;
 }
+
+// get users profile service ------------------------
+exports.getAuserService= async(id)=>{
+    const result = await User.findOne({_id : id})
+    return result
+}
+// manage users profile service ------------------------
+exports.manageProfileService= async(id,data)=>{
+    const result = await User.updateOne({ _id: id }, { $set: data })
+    return result
+}

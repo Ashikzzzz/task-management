@@ -1,4 +1,4 @@
-const { createAuserService, loginAuserService } = require("../services/user.service");
+const { createAuserService, loginAuserService, getAuserService, manageProfileService } = require("../services/user.service");
 const { generateToken } = require("../utils/token");
 
 // save a user controller-------------------------------
@@ -91,3 +91,46 @@ exports.loginAuser = async(req, res, next)=>{
         })
     }
 }
+
+
+// manage user profile controller ------------------
+
+exports.getAuser = async(req, res, next)=>{
+    try {
+        const result = await getAuserService(req.params.id)
+        console.log(result)
+        res.status(200).json({
+            status: 'success',
+            massage: "get a user Successfully!",
+            data: result
+        })
+    } catch (error) {
+        res.status(400).json({
+            status: 'error',
+            massage: "User inserted Error",
+            error: error.message
+        })
+    }
+}
+
+// update a user controller 
+
+exports.manageAuser = async (req, res, next) => {
+    try {
+        const id = req.params.id
+        const body = req.body
+        const result = await manageProfileService(id, body)
+        res.status(200).json({
+            status: 'success',
+            massage: "Update a user successful",
+            data: result
+        })
+    }
+    catch (error) {
+        res.status(400).json({
+            status: "error",
+            massage: "user is not updated",
+            error: error.message
+        })
+    }
+};
