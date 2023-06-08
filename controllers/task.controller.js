@@ -1,11 +1,13 @@
 
 const { createTaskServices, updateAtaskServices, deleteTaskServices, getTaskUserToUserServices, getAllTaskServices, getATaskServices, getTaskByStatusServices } = require("../services/task.services");
+const { sendMailWithGmail } = require("../utils/email");
 
 // create a booking controller --
 exports.createAtask = async (req, res, next) => {
     try {
-      
+
         const result = await createTaskServices(req.body)
+
         res.status(200).json({
             status: 'success',
             massage: "Create task Successfully!",
@@ -128,7 +130,7 @@ exports.getTaskUserToUser = async (req, res, next) => {
     }
 };
 
-// get task by filtering due date-----------------------
+// get task by filtering status  -----------------------
 exports.getTaskByStatus = async (req, res, next) => {
     try {
      const  {status} = req.query
