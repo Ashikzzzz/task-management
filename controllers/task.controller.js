@@ -1,5 +1,5 @@
 
-const { createTaskServices, updateAtaskServices, deleteTaskServices, getTaskUserToUserServices, getAllTaskServices, getATaskServices } = require("../services/task.services");
+const { createTaskServices, updateAtaskServices, deleteTaskServices, getTaskUserToUserServices, getAllTaskServices, getATaskServices, getTaskByStatusServices } = require("../services/task.services");
 
 // create a booking controller --
 exports.createAtask = async (req, res, next) => {
@@ -64,25 +64,6 @@ exports.deleteAtask = async (req, res, next) => {
     }
 };
 
-// get a task from users to user -----------------------
-exports.getTaskUserToUser = async (req, res, next) => {
-    try {
-    //   console.log(req.params.email)
-        const result = await getTaskUserToUserServices(req.query.email)
-        res.status(200).json({
-            status: 'success',
-            massage: "Create task Successfully!",
-            data: result
-        })
-    }
-    catch (error) {
-        res.status(400).json({
-            status: 'error',
-            massage: "Create task Error",
-            error: error.message
-        })
-    }
-};
 
 
 // get all task---------------------------------------
@@ -114,6 +95,47 @@ exports.getATask = async (req, res, next) => {
         res.status(200).json({
             status: 'success',
             massage: "get task Successfully!",
+            data: result
+        })
+    }
+    catch (error) {
+        res.status(400).json({
+            status: 'error',
+            massage: "get task Error",
+            error: error.message
+        })
+    }
+};
+
+
+// get task user from another user  and filtering by assigned user-----------------------
+exports.getTaskUserToUser = async (req, res, next) => {
+    try {
+    //   console.log(req.params.email)
+        const result = await getTaskUserToUserServices(req.query.email)
+        res.status(200).json({
+            status: 'success',
+            massage: "get a task Successfully!",
+            data: result
+        })
+    }
+    catch (error) {
+        res.status(400).json({
+            status: 'error',
+            massage: "get task Error",
+            error: error.message
+        })
+    }
+};
+
+// get task by filtering due date-----------------------
+exports.getTaskByStatus = async (req, res, next) => {
+    try {
+     const  {status} = req.query
+        const result = await getTaskByStatusServices(status)
+        res.status(200).json({
+            status: 'success',
+            massage: "get a task Successfully!",
             data: result
         })
     }

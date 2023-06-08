@@ -33,13 +33,6 @@ exports.deleteTaskServices = async (id) => {
     return result
 };
 
-
-// get task from user to user service ---------------
-exports.getTaskUserToUserServices = async (email) => {
-    console.log(email)
-    const result = await Task.find({email: {$eq: email}})
-    return result
-};
 // get task from user to user service ---------------
 exports.getAllTaskServices = async () => {
     const result = await Task.find({})
@@ -53,3 +46,17 @@ exports.getATaskServices = async (id) => {
 };
 
 
+// get task user from another user  and filtering by assigned user---------------
+exports.getTaskUserToUserServices = async (email) => {
+    console.log(email)
+    const result = await Task.find({email: {$eq: email}})
+    return result
+};
+
+
+// get task user from another user  and filtering by assigned user---------------
+exports.getTaskByStatusServices = async (status) => {
+    console.log(status)
+    const result = await Task.find({status: {$eq: status}})
+    return result
+};

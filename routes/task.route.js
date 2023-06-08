@@ -24,8 +24,12 @@ router.route("/delete-task/:id")
 .delete(taskController.deleteAtask)
 
 
-// get task user from another user ----------------------
+// get task user from another user  and filtering by assigned user----------------------
 router.route("/get-a-task/email")
 .get(taskController.getTaskUserToUser)
+
+// filtering by due_date----------------------------------------------
+router.route("/get-a-task/status")
+.get(taskController.getTaskByStatus)
 
 module.exports = router;
