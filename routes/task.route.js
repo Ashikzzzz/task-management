@@ -6,6 +6,13 @@ const taskController= require("../controllers/task.controller")
 router.route("/create-task")
 .post(taskController.createAtask)
 
+//get all task-------------------------
+router.route("/get-all-task")
+.get(taskController.getAllTask)
+
+// update a task router -------------------------
+router.route("/get-task/:id")
+.get(taskController.getATask)
 
 // update a task router -------------------------
 router.route("/update-task/:id")
@@ -18,7 +25,7 @@ router.route("/delete-task/:id")
 
 
 // get task user from another user ----------------------
-router.route("/get-task/email")
+router.route("/get-a-task/email")
 .get(taskController.getTaskUserToUser)
 
 module.exports = router;

@@ -1,5 +1,5 @@
 const Task= require("../model/task")
-
+const mongoose =require("mongoose")
 
 // create a task and it is created for one time. avoid create duplicate task---------------
 exports.createTaskServices = async (data) => {
@@ -36,7 +36,19 @@ exports.deleteTaskServices = async (id) => {
 
 // get task from user to user service ---------------
 exports.getTaskUserToUserServices = async (email) => {
-    const result = await Task.findOne({email: {$eq: email}})
+    console.log(email)
+    const result = await Task.find({email: {$eq: email}})
+    return result
+};
+// get task from user to user service ---------------
+exports.getAllTaskServices = async () => {
+    const result = await Task.find({})
+    return result
+};
+
+// get  a task from user to user service ---------------
+exports.getATaskServices = async (id) => { 
+    const result = await Task.findById({_id:id})
     return result
 };
 

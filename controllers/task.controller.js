@@ -1,5 +1,5 @@
 
-const { createTaskServices, updateAtaskServices, deleteTaskServices, getTaskUserToUserServices } = require("../services/task.services");
+const { createTaskServices, updateAtaskServices, deleteTaskServices, getTaskUserToUserServices, getAllTaskServices, getATaskServices } = require("../services/task.services");
 
 // create a booking controller --
 exports.createAtask = async (req, res, next) => {
@@ -67,7 +67,7 @@ exports.deleteAtask = async (req, res, next) => {
 // get a task from users to user -----------------------
 exports.getTaskUserToUser = async (req, res, next) => {
     try {
-      
+    //   console.log(req.params.email)
         const result = await getTaskUserToUserServices(req.query.email)
         res.status(200).json({
             status: 'success',
@@ -85,23 +85,43 @@ exports.getTaskUserToUser = async (req, res, next) => {
 };
 
 
-
-//  user persistance -------------------------------
-exports.getMe = async(req, res, next)=>{
+// get all task---------------------------------------
+exports.getAllTask = async (req, res, next) => {
     try {
-        // console.log(req?.user?.userEmail)
-       let user= await findUserByEmail(req?.user?.userEmail)
-       console.log(user)
+      
+        const result = await getAllTaskServices()
         res.status(200).json({
             status: 'success',
-            massage: "User inserted Successfully!",
-            data: user
+            massage: "Create task Successfully!",
+            data: result
         })
-    } catch (error) {
+    }
+    catch (error) {
         res.status(400).json({
             status: 'error',
-            massage: "Data inserted Error",
+            massage: "Create task Error",
             error: error.message
         })
     }
-}
+};
+
+
+// get a  task---------------------------------------
+exports.getATask = async (req, res, next) => {
+    try {
+       
+        const result = await getATaskServices(req.params.id)
+        res.status(200).json({
+            status: 'success',
+            massage: "get task Successfully!",
+            data: result
+        })
+    }
+    catch (error) {
+        res.status(400).json({
+            status: 'error',
+            massage: "get task Error",
+            error: error.message
+        })
+    }
+};

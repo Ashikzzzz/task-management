@@ -30,4 +30,10 @@ exports.manageProfileService= async(id,data)=>{
 exports.findUserByEmail = async (email) => {
     return await User.findOne({ email });
  };
+
+ // get all admin ---------------------
+exports.getUserAsAdminServices=async()=>{
+    const result = await User.find({role:"admin"})
+    return result
+}
  

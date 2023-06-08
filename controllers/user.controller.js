@@ -1,4 +1,4 @@
-const { createAuserService, loginAuserService, getAuserService, manageProfileService, findUserByEmail } = require("../services/user.service");
+const { createAuserService, loginAuserService, getAuserService, manageProfileService, findUserByEmail, getUserAsAdminServices } = require("../services/user.service");
 const { generateToken } = require("../utils/token");
 
 // save a user controller-------------------------------
@@ -139,15 +139,34 @@ exports.manageAuser = async (req, res, next) => {
 //  user persistance -------------------------------
 exports.getMe = async(req, res, next)=>{
     try {
-        // console.log(req?.user?.userEmail)
+        console.log(req?.user?.email)
        let user= await findUserByEmail(req?.user?.email)
-       console.log(user)
+       console.log("user",user)
         res.status(200).json({
             status: 'success',
             massage: "User inserted Successfully!",
             data: user
         })
     } catch (error) {
+        res.status(400).json({
+            status: 'error',
+            massage: "Data inserted Error",
+            error: error.message
+        })
+    }
+}
+
+// get  user as an admin-----------------------
+exports.getUserAsAdmin = async(req, res, next)=>{
+    try {
+        const result= await getUserAsAdminServices()
+        res.status(200).json({
+            status: 'success',
+            massage: "Data inserted Successfully!",
+            data: result
+        })
+    }
+     catch (error) {
         res.status(400).json({
             status: 'error',
             massage: "Data inserted Error",

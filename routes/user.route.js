@@ -21,4 +21,7 @@ router.route("/manage-profile/:id")
 // user persistance ------------------
 router.get("/me", verifyToken, userController.getMe);
 
+// get user as an admin
+router.get("/dashboard/admin",userController.getUserAsAdmin)
+
 module.exports = router;
